@@ -17,6 +17,7 @@ import java.util.Scanner;
 public class LabyrinthImpl implements Labyrinth {
     
     private CellType[][] labyrinth;
+    private Coordinate playerPosition;
     
     public LabyrinthImpl() {
         
@@ -43,6 +44,8 @@ public class LabyrinthImpl implements Labyrinth {
                             break;
                         case 'S':
                             labyrinth[hh][ww] = CellType.START;
+                            
+                            playerPosition = new Coordinate(hh, ww);
                             break;
                         default :
                             labyrinth[hh][ww] = CellType.EMPTY;
@@ -99,7 +102,13 @@ public class LabyrinthImpl implements Labyrinth {
 
     @Override
     public void setCellType(Coordinate c, CellType type) throws CellException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        getCellType(c); // ezzel vizsgáljuk a kivételeket ismétlés nélkül
+        
+        labyrinth[c.getRow()][c.getCol()] = type;
+        
+        if (type == CellType.START) {
+            playerPosition = c;
+        }
     }
 
     @Override
