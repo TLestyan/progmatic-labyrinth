@@ -57,12 +57,18 @@ public class LabyrinthImpl implements Labyrinth {
 
     @Override
     public int getWidth() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (null == labyrinth) {
+            return -1;
+        }
+        return labyrinth[0].length;
     }
 
     @Override
     public int getHeight() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (null == labyrinth) {
+            return -1;
+        }
+        return labyrinth.length;
     }
 
     @Override
