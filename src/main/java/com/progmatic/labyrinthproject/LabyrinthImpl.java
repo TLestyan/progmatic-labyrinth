@@ -7,6 +7,7 @@ import com.progmatic.labyrinthproject.exceptions.InvalidMoveException;
 import com.progmatic.labyrinthproject.interfaces.Labyrinth;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -127,7 +128,40 @@ public class LabyrinthImpl implements Labyrinth {
 
     @Override
     public List<Direction> possibleMoves() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<Direction> possibleMoves = new ArrayList<>();
+        
+        int row = playerPosition.getRow();
+        int col = playerPosition.getCol();
+        
+        try {
+            if (getCellType( new Coordinate(row - 1, col)) 
+                    != CellType.WALL) {
+                possibleMoves.add(Direction.NORTH);
+            }
+        } catch (CellException e) {}
+        
+        try {
+            if (getCellType( new Coordinate(row, col + 1)) 
+                    != CellType.WALL) {
+                possibleMoves.add(Direction.EAST);
+            }
+        } catch (CellException e) {}
+        
+        try {
+            if (getCellType( new Coordinate(row + 1, col)) 
+                    != CellType.WALL) {
+                possibleMoves.add(Direction.SOUTH);
+            }
+        } catch (CellException e) {}
+        
+        try {
+            if (getCellType( new Coordinate(row, col - 1)) 
+                    != CellType.WALL) {
+                possibleMoves.add(Direction.WEST);
+            }
+        } catch (CellException e) {}
+        
+        return possibleMoves;
     }
 
     @Override
