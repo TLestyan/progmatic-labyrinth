@@ -40,14 +40,16 @@ public class LabyrinthImpl implements Labyrinth {
                         case 'W':
                             labyrinth[hh][ww] = CellType.WALL;
                             break;
+                            
                         case 'E':
                             labyrinth[hh][ww] = CellType.END;
                             break;
+                            
                         case 'S':
                             labyrinth[hh][ww] = CellType.START;
-                            
-                            playerPosition = new Coordinate(hh, ww);
+                            playerPosition = new Coordinate(ww, hh);
                             break;
+                            
                         default :
                             labyrinth[hh][ww] = CellType.EMPTY;
                             break;
@@ -134,28 +136,28 @@ public class LabyrinthImpl implements Labyrinth {
         int col = playerPosition.getCol();
         
         try {
-            if (getCellType( new Coordinate(row - 1, col)) 
+            if (getCellType( new Coordinate(col, row - 1)) 
                     != CellType.WALL) {
                 possibleMoves.add(Direction.NORTH);
             }
         } catch (CellException e) {}
         
         try {
-            if (getCellType( new Coordinate(row, col + 1)) 
+            if (getCellType( new Coordinate(col + 1, row)) 
                     != CellType.WALL) {
                 possibleMoves.add(Direction.EAST);
             }
         } catch (CellException e) {}
         
         try {
-            if (getCellType( new Coordinate(row + 1, col)) 
+            if (getCellType( new Coordinate(col, row + 1)) 
                     != CellType.WALL) {
                 possibleMoves.add(Direction.SOUTH);
             }
         } catch (CellException e) {}
         
         try {
-            if (getCellType( new Coordinate(row, col - 1)) 
+            if (getCellType( new Coordinate(col - 1, row)) 
                     != CellType.WALL) {
                 possibleMoves.add(Direction.WEST);
             }
