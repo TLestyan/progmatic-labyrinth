@@ -118,7 +118,11 @@ public class LabyrinthImpl implements Labyrinth {
 
     @Override
     public boolean hasPlayerFinished() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try{
+            return getCellType(playerPosition) == CellType.END;
+        } catch (CellException e) {
+            return false;
+        }
     }
 
     @Override
