@@ -168,7 +168,37 @@ public class LabyrinthImpl implements Labyrinth {
 
     @Override
     public void movePlayer(Direction direction) throws InvalidMoveException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int row = playerPosition.getRow();
+        int col = playerPosition.getCol();
+        
+        switch (direction) {
+            case NORTH :
+                row--;
+                break;
+                
+            case EAST :
+                col++;
+                break;
+                
+            case SOUTH :
+                row++;
+                break;
+                
+            case WEST :
+                col--;
+                break;
+        }
+        
+        try {
+            Coordinate c = new Coordinate(col, row);
+            if (getCellType(c) != CellType.WALL) {
+                playerPosition = c;
+            } else {
+                throw new InvalidMoveException();
+            }
+        } catch (CellException e) {
+            throw new InvalidMoveException();
+        }
     }
 
 }
