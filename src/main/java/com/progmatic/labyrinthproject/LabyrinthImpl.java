@@ -73,7 +73,16 @@ public class LabyrinthImpl implements Labyrinth {
 
     @Override
     public CellType getCellType(Coordinate c) throws CellException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (null == labyrinth) {
+            throw new CellException(c, "Labyrinth is not loaded yet.");
+        }
+        if (c.getRow() < 0
+                || c.getRow() >= labyrinth.length
+                || c.getCol() < 0
+                || c.getCol() >= labyrinth[0].length) {
+            throw new CellException(c, "Coordinate is out of labyrinth");
+        }
+        return labyrinth[c.getRow()][c.getCol()];
     }
 
     @Override
